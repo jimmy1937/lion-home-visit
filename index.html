@@ -1,0 +1,324 @@
+<!-- Concept animation: a lion robot visits a customer at home. Self-contained (inline SVG + JS). -->
+<title>Lion 到府服務</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Layout: one centred stage card, caption and controls under it */
+  :root { --bg:#f5f5f4; --fg:#1c1917; --muted:#57534e; --card:#fff; --red:#db0011; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#1c1917; --fg:#f5f5f4; --muted:#a8a29e; --card:#292524; color-scheme:dark; } }
+  :root[data-theme="dark"] { --bg:#1c1917; --fg:#f5f5f4; --muted:#a8a29e; --card:#292524; color-scheme:dark; }
+  body { background:var(--bg); color:var(--fg); font:16px/1.5 -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
+         margin:0; padding-block:1.5rem 3rem;
+         padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
+  button:focus-visible { outline:3px solid var(--red); outline-offset:2px; }
+  .wrap { max-width:960px; margin:0 auto; }
+  h1 { font-size:1.4rem; margin:0 0 .2rem; }
+  .meta { color:var(--muted); font-size:.85rem; margin:0 0 1rem; }
+  .stage { background:var(--card); border-radius:14px; overflow:hidden; box-shadow:0 4px 20px #0002; }
+  svg { display:block; width:100%; height:auto; }
+  .cap { padding:.8rem 1rem; min-height:3.6rem; border-top:1px solid #0001; }
+  .cap .zh { font-size:1.15rem; font-weight:600; }
+  .cap .en { color:var(--muted); font-size:.85rem; }
+  .ctrl { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; padding:.6rem 1rem 1rem; }
+  button { font:inherit; padding:.35rem .9rem; border-radius:8px; border:1px solid #0003; background:var(--red); color:#fff; cursor:pointer; }
+  button.ch { background:transparent; color:var(--fg); font-size:.85rem; }
+  button.ch.on { border-color:var(--red); color:var(--red); font-weight:600; }
+  .bar { flex:1 1 100%; height:6px; background:#0001; border-radius:3px; overflow:hidden; }
+  .bar div { height:100%; width:0; background:var(--red); }
+</style>
+
+<div class="wrap">
+  <h1>Lion 獅子理專：到府服務概念</h1>
+  <p class="meta">未來願景概念動畫 · 到府辦銀行業務、防詐教育、理財教育 · 角色為示意，非正式品牌素材</p>
+
+  <div class="stage">
+    <svg viewBox="0 0 800 450" role="img" aria-label="Lion robot home visit animation">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#e0f2fe"/>
+        </linearGradient>
+        <!-- Grandma, origin = feet centre -->
+        <g id="granny">
+          <rect x="-12" y="-30" width="8" height="30" fill="#57534e"/>
+          <rect x="4" y="-30" width="8" height="30" fill="#57534e"/>
+          <path d="M-24 -30 L-16 -85 L16 -85 L24 -30 Z" fill="#7c3aed"/>
+          <rect x="-30" y="-82" width="9" height="34" rx="4" fill="#7c3aed"/>
+          <rect x="21" y="-82" width="9" height="34" rx="4" fill="#7c3aed"/>
+          <circle cx="0" cy="-104" r="19" fill="#f2c9a0"/>
+          <path d="M-19 -108 Q0 -132 19 -108 Q12 -118 0 -118 Q-12 -118 -19 -108" fill="#d6d3d1"/>
+          <circle cx="0" cy="-126" r="9" fill="#d6d3d1"/>
+          <circle cx="-7" cy="-104" r="5" fill="none" stroke="#44403c" stroke-width="1.5"/>
+          <circle cx="7" cy="-104" r="5" fill="none" stroke="#44403c" stroke-width="1.5"/>
+          <path d="M-6 -94 Q0 -90 6 -94" fill="none" stroke="#44403c" stroke-width="1.5"/>
+        </g>
+      </defs>
+
+      <!-- ===== Exterior scene ===== -->
+      <g id="outside">
+        <rect width="800" height="450" fill="url(#sky)"/>
+        <circle cx="700" cy="70" r="34" fill="#fde047"/>
+        <g fill="#fff" opacity=".9">
+          <ellipse cx="200" cy="80" rx="50" ry="16"/><ellipse cx="235" cy="70" rx="30" ry="14"/>
+          <ellipse cx="460" cy="110" rx="40" ry="12"/>
+        </g>
+        <rect y="380" width="800" height="70" fill="#86efac"/>
+        <rect y="395" width="800" height="22" fill="#a8a29e"/>
+        <!-- branch -->
+        <rect x="20" y="230" width="150" height="150" fill="#fff" stroke="#d6d3d1"/>
+        <rect x="14" y="220" width="162" height="20" fill="#db0011"/>
+        <text x="95" y="235" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">分行 BRANCH</text>
+        <rect x="40" y="260" width="45" height="40" fill="#bae6fd"/><rect x="105" y="260" width="45" height="40" fill="#bae6fd"/>
+        <rect x="75" y="320" width="40" height="60" fill="#78716c"/>
+        <!-- house -->
+        <polygon points="505,250 620,185 735,250" fill="#b91c1c"/>
+        <rect x="520" y="250" width="200" height="130" fill="#fde68a"/>
+        <rect x="650" y="280" width="45" height="40" fill="#bae6fd" stroke="#92400e" stroke-width="3"/>
+        <rect x="588" y="298" width="44" height="82" fill="#451a03"/>
+        <use href="#granny" id="grannyDoor" transform="translate(610,380) scale(.62)" opacity="0"/>
+        <rect id="door" x="590" y="300" width="40" height="80" fill="#92400e"/>
+        <circle id="knob" cx="622" cy="342" r="3" fill="#fde047"/>
+        <!-- drone with card -->
+        <g id="drone" opacity="0">
+          <rect x="-22" y="-4" width="44" height="8" rx="4" fill="#44403c"/>
+          <line x1="-30" y1="-8" x2="-14" y2="-8" stroke="#44403c" stroke-width="3"/>
+          <line x1="14" y1="-8" x2="30" y2="-8" stroke="#44403c" stroke-width="3"/>
+          <rect x="-12" y="8" width="24" height="15" rx="2" fill="#db0011"/>
+          <rect x="-12" y="12" width="24" height="3" fill="#fff"/>
+        </g>
+        <g id="bubbleDoor" opacity="0">
+          <rect x="420" y="190" width="150" height="40" rx="10" fill="#fff" stroke="#db0011" stroke-width="2"/>
+          <text x="495" y="216" text-anchor="middle" font-size="16" fill="#1c1917">叮咚！到府服務</text>
+        </g>
+      </g>
+
+      <!-- ===== Interior scene ===== -->
+      <g id="inside" opacity="0">
+        <rect width="800" height="450" fill="#fef3c7"/>
+        <rect y="370" width="800" height="80" fill="#d6a76c"/>
+        <rect x="40" y="60" width="140" height="110" fill="#bae6fd" stroke="#92400e" stroke-width="6"/>
+        <line x1="110" y1="60" x2="110" y2="170" stroke="#92400e" stroke-width="4"/>
+        <rect x="660" y="70" width="80" height="60" fill="#fca5a5" stroke="#78350f" stroke-width="4"/>
+        <!-- sofa -->
+        <rect x="90" y="300" width="230" height="75" rx="14" fill="#0f766e"/>
+        <rect x="80" y="280" width="30" height="95" rx="10" fill="#115e59"/>
+        <rect x="300" y="280" width="30" height="95" rx="10" fill="#115e59"/>
+        <use href="#granny" transform="translate(205,375)"/>
+        <!-- side table + phone -->
+        <rect x="355" y="330" width="70" height="8" fill="#78350f"/>
+        <rect x="385" y="338" width="10" height="37" fill="#78350f"/>
+        <g id="phone" transform="translate(390,318)">
+          <rect x="-9" y="-16" width="18" height="30" rx="3" fill="#1c1917"/>
+          <rect x="-7" y="-13" width="14" height="22" fill="#38bdf8"/>
+          <g id="ring" opacity="0" stroke="#db0011" stroke-width="2" fill="none">
+            <path d="M14 -14 Q20 -2 14 10"/><path d="M-14 -14 Q-20 -2 -14 10"/>
+          </g>
+        </g>
+        <g id="scamBubble" opacity="0">
+          <rect x="300" y="250" width="250" height="44" rx="10" fill="#fff" stroke="#db0011" stroke-width="2"/>
+          <text x="425" y="278" text-anchor="middle" font-size="14" fill="#b91c1c">「我是警察，請把錢轉到安全帳戶」</text>
+        </g>
+        <!-- projection beam + panel -->
+        <polygon id="beam" points="600,265 330,232 590,232" fill="#38bdf8" opacity=".18"/>
+        <g id="panel">
+          <rect x="300" y="30" width="320" height="202" rx="12" fill="#0c4a6e" opacity=".92"/>
+          <text id="panelTitle" x="460" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">銀行業務</text>
+
+          <g id="pBank">
+            <circle cx="400" cy="140" r="44" fill="none" stroke="#7dd3fc" stroke-width="3" stroke-dasharray="10 6"/>
+            <circle cx="400" cy="135" r="20" fill="#f2c9a0"/>
+            <rect id="scan" x="356" y="100" width="88" height="3" fill="#4ade80"/>
+            <text id="bankTxt1" x="530" y="120" text-anchor="middle" font-size="14" fill="#e0f2fe">身分驗證中…</text>
+            <g id="bankDone" opacity="0">
+              <text x="530" y="125" text-anchor="middle" font-size="30" fill="#4ade80">✓</text>
+              <text x="530" y="152" text-anchor="middle" font-size="13" fill="#e0f2fe">轉帳 HK$5,000</text>
+              <text x="530" y="170" text-anchor="middle" font-size="13" fill="#e0f2fe">給孫子 · 完成</text>
+            </g>
+          </g>
+
+          <g id="pFraud" opacity="0">
+            <text id="f1" x="320" y="100" font-size="15" fill="#fff" opacity="0">① 不透露 OTP、密碼</text>
+            <text id="f2" x="320" y="140" font-size="15" fill="#fff" opacity="0">② 警察不會叫你轉帳到「安全帳戶」</text>
+            <text id="f3" x="320" y="180" font-size="15" fill="#fff" opacity="0">③ 先掛斷，再打官方電話查證</text>
+            <text id="fQuiz" x="460" y="215" text-anchor="middle" font-size="13" fill="#4ade80" opacity="0">小測驗：奶奶答對 3/3 ✓</text>
+          </g>
+
+          <g id="pWM" opacity="0">
+            <line x1="325" y1="210" x2="470" y2="210" stroke="#7dd3fc"/>
+            <rect class="bar" x="335" y="210" width="20" height="0" fill="#fde047"/>
+            <rect class="bar" x="365" y="210" width="20" height="0" fill="#fde047"/>
+            <rect class="bar" x="395" y="210" width="20" height="0" fill="#fde047"/>
+            <rect class="bar" x="425" y="210" width="20" height="0" fill="#fde047"/>
+            <text x="397" y="225" text-anchor="middle" font-size="11" fill="#bae6fd">每月存 HK$2,000（示意）</text>
+            <g id="pie" opacity="0" transform="translate(545,135)">
+              <circle r="40" fill="#38bdf8"/>
+              <path d="M0 0 L0 -40 A40 40 0 0 1 38 12 Z" fill="#fde047"/>
+              <path d="M0 0 L38 12 A40 40 0 0 1 -20 35 Z" fill="#4ade80"/>
+              <text y="62" text-anchor="middle" font-size="12" fill="#e0f2fe">分散：存款／債券／股票</text>
+            </g>
+          </g>
+        </g>
+        <g id="shield" opacity="0" transform="translate(520,250)">
+          <path d="M0 -26 L22 -16 L22 4 Q22 22 0 30 Q-22 22 -22 4 L-22 -16 Z" fill="#db0011"/>
+          <text y="8" text-anchor="middle" font-size="20" fill="#fff" font-weight="700">!</text>
+        </g>
+      </g>
+
+      <!-- ===== Lion robot (shared by both scenes), origin = wheel bottom ===== -->
+      <g id="lion">
+        <g id="lionBody">
+          <circle cx="-20" cy="-11" r="11" fill="#44403c"/><circle cx="20" cy="-11" r="11" fill="#44403c"/>
+          <rect x="-36" y="-80" width="72" height="62" rx="18" fill="#fff" stroke="#d6d3d1" stroke-width="2"/>
+          <rect x="-36" y="-62" width="72" height="9" fill="#db0011"/>
+          <rect x="-15" y="-46" width="30" height="20" rx="4" fill="#1e293b"/>
+          <path d="M-10 -36 L-4 -36 L-1 -42 L3 -30 L6 -36 L10 -36" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+          <g id="armL" transform="translate(-36,-72)"><rect x="-10" y="0" width="10" height="34" rx="5" fill="#fff" stroke="#d6d3d1"/></g>
+          <g id="armR" transform="translate(36,-72)"><rect x="0" y="0" width="10" height="34" rx="5" fill="#fff" stroke="#d6d3d1"/></g>
+          <g transform="translate(0,-112)">
+            <g fill="#d97706">
+              <circle cx="0" cy="-34" r="11"/><circle cx="24" cy="-24" r="11"/><circle cx="34" cy="0" r="11"/>
+              <circle cx="24" cy="24" r="11"/><circle cx="0" cy="34" r="11"/><circle cx="-24" cy="24" r="11"/>
+              <circle cx="-34" cy="0" r="11"/><circle cx="-24" cy="-24" r="11"/>
+            </g>
+            <circle r="34" fill="#f59e0b"/>
+            <circle cx="-20" cy="-22" r="8" fill="#fbbf24"/><circle cx="20" cy="-22" r="8" fill="#fbbf24"/>
+            <circle r="25" fill="#fcd34d"/>
+            <g id="eyes">
+              <ellipse cx="-9" cy="-5" rx="4" ry="5" fill="#1c1917"/><ellipse cx="9" cy="-5" rx="4" ry="5" fill="#1c1917"/>
+              <circle cx="-8" cy="-7" r="1.4" fill="#fff"/><circle cx="10" cy="-7" r="1.4" fill="#fff"/>
+            </g>
+            <path d="M-5 5 L5 5 L0 10 Z" fill="#7c2d12"/>
+            <path d="M-7 13 Q0 19 7 13" fill="none" stroke="#7c2d12" stroke-width="2"/>
+            <circle cx="-16" cy="8" r="4" fill="#fb7185" opacity=".5"/><circle cx="16" cy="8" r="4" fill="#fb7185" opacity=".5"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+
+    <div class="cap"><div class="zh" id="capZh"></div><div class="en" id="capEn"></div></div>
+    <div class="ctrl">
+      <button id="play">⏸ 暫停</button>
+      <button id="replay">↺ 重播</button>
+      <span id="chapters"></span>
+      <div class="bar"><div id="prog"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Timeline: one function renders the whole frame from the time t (seconds).
+// Like a pure Python function: same t in → same picture out. Easy to seek and replay.
+const TOTAL = 42;
+const CAPS = [
+  [0,  "Lion 從分行出發，前往客戶家", "Lion leaves the branch to visit a customer"],
+  [6,  "叮咚！陳奶奶開門", "Ding-dong! Grandma Chan opens the door"],
+  [9,  "臉部辨識，確認是本人", "Face check confirms her identity"],
+  [13, "在家就能轉帳給孫子", "She sends money to her grandson from home"],
+  [17, "可疑來電！有人假冒警察", "A scam call: someone pretends to be the police"],
+  [21, "Lion 教奶奶防詐三原則", "Lion teaches three anti-fraud rules"],
+  [27, "理財教育：每月小額定期投資", "Wealth education: invest a small amount every month"],
+  [31, "分散投資，風險更低", "Spread your money to lower the risk"],
+  [36, "下次見！無人機送來新卡", "See you next time! A drone brings the new card"],
+];
+const CHAPTERS = [["出發",0],["銀行業務",9],["防詐教育",17],["理財教育",27],["道別",36]];
+
+const $ = id => document.getElementById(id);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const seg = (t, a, b) => clamp((t - a) / (b - a), 0, 1);   // 0→1 progress inside [a,b]
+const ease = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+const lerp = (a, b, x) => a + (b - a) * x;
+const show = (id, on) => $(id).setAttribute("opacity", on ? 1 : 0);
+
+function render(t) {
+  const outside = t < 9 || t >= 36;
+  show("outside", outside);
+  show("inside", !outside);
+
+  // --- lion position, facing, bob ---
+  let x, y = 380, s = 0.9, face = 1, moving = false;
+  if (t < 6)       { x = lerp(110, 545, ease(seg(t, 0, 6))); moving = true; }
+  else if (t < 9)  { x = 545; }
+  else if (t < 36) { x = 640; y = 395; s = 1.15; }
+  else             { const p = seg(t, 38, 42); x = lerp(545, 110, ease(p)); moving = p > 0; face = moving ? -1 : 1; }
+  const bob = moving ? -Math.abs(Math.sin(t * 9)) * 5 : 0;
+  $("lion").setAttribute("transform", `translate(${x},${y + bob}) scale(${s * face},${s})`);
+
+  // eye blink every 3 s
+  const blink = (t % 3) < 0.12 ? 0.1 : 1;
+  $("eyes").setAttribute("transform", `translate(0,-5) scale(1,${blink}) translate(0,5)`);
+
+  // right arm: wave at the door, while teaching, and at goodbye
+  const waving = (t >= 6 && t < 9) || (t >= 21 && t < 24) || (t >= 36 && t < 38.5);
+  const ang = waving ? -150 + Math.sin(t * 10) * 20 : 0;
+  $("armR").setAttribute("transform", `translate(36,-72) rotate(${ang},5,5)`);
+
+  // --- exterior details ---
+  const open = ease(seg(t, 6.3, 7.3));
+  $("door").setAttribute("transform", `translate(590,0) scale(${1 - open * 0.85},1) translate(-590,0)`);
+  show("knob", open < 0.3);
+  show("grannyDoor", t >= 6.8 && t < 9);
+  show("bubbleDoor", t >= 6 && t < 9);
+  const dp = seg(t, 36, 41);
+  $("drone").setAttribute("opacity", t >= 36 && dp < 1 ? 1 : 0);
+  $("drone").setAttribute("transform", `translate(${lerp(-40, 610, ease(dp))},${150 + Math.sin(t * 6) * 6 + dp * 120})`);
+
+  // --- interior panel ---
+  const mode = t < 17 ? "bank" : t < 27 ? "fraud" : "wm";
+  $("panelTitle").textContent = { bank: "銀行業務", fraud: "防詐教育", wm: "理財教育" }[mode];
+  show("pBank", mode === "bank");
+  show("pFraud", mode === "fraud");
+  show("pWM", mode === "wm");
+
+  // bank: scan line sweeps, then success
+  $("scan").setAttribute("y", 100 + ((t * 60) % 80));
+  show("scan", t < 13);
+  show("bankTxt1", t < 13);
+  show("bankDone", t >= 13);
+
+  // fraud: phone rings, scam bubble, then shield + rules one by one
+  const ringing = t >= 17 && t < 21;
+  show("ring", ringing && Math.floor(t * 6) % 2 === 0);
+  $("phone").setAttribute("transform", `translate(390,318) rotate(${ringing ? Math.sin(t * 40) * 8 : 0})`);
+  show("scamBubble", ringing);
+  show("shield", t >= 21 && t < 27);
+  show("f1", t >= 21.5); show("f2", t >= 23); show("f3", t >= 24.5); show("fQuiz", t >= 26);
+
+  // wealth: bars grow, then pie
+  const heights = [30, 60, 95, 135];
+  document.querySelectorAll("#pWM .bar").forEach((b, i) => {
+    const h = heights[i] * ease(seg(t, 27.5 + i * 0.6, 28.5 + i * 0.6));
+    b.setAttribute("y", 210 - h);
+    b.setAttribute("height", h);
+  });
+  show("pie", t >= 31);
+
+  // --- caption, chapter, progress ---
+  const cap = [...CAPS].reverse().find(c => t >= c[0]);
+  $("capZh").textContent = cap[1];
+  $("capEn").textContent = cap[2];
+  $("prog").style.width = (t / TOTAL * 100) + "%";
+  document.querySelectorAll(".ch").forEach((b, i) => {
+    const next = CHAPTERS[i + 1] ? CHAPTERS[i + 1][1] : TOTAL;
+    b.classList.toggle("on", t >= CHAPTERS[i][1] && t < next);
+  });
+}
+
+// --- playback loop ---
+let t = 0, playing = true, last = performance.now();
+function tick(now) {
+  if (playing) t = (t + (now - last) / 1000) % TOTAL;
+  last = now;
+  render(t);
+  requestAnimationFrame(tick);
+}
+$("play").onclick = () => { playing = !playing; $("play").textContent = playing ? "⏸ 暫停" : "▶ 播放"; };
+$("replay").onclick = () => { t = 0; playing = true; $("play").textContent = "⏸ 暫停"; };
+CHAPTERS.forEach(([name, start]) => {
+  const b = document.createElement("button");
+  b.className = "ch"; b.textContent = name;
+  b.onclick = () => { t = start; };
+  $("chapters").appendChild(b);
+});
+// ?t=20 in the URL freezes the frame at 20 s (used for screenshots)
+const qt = new URLSearchParams(location.search).get("t");
+if (qt !== null) { t = +qt; playing = false; $("play").textContent = "▶ 播放"; }
+requestAnimationFrame(tick);
+</script>
